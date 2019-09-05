@@ -3112,7 +3112,10 @@ void QXmlStreamWriterPrivate::writeEscaped(const QString &s, bool escapeWhitespa
             escaped.append(QLatin1String("&amp;"));
             break;
         case '\"':
-            escaped.append(QLatin1String("&quot;"));
+            if (escapeWhitespace)
+              escaped.append(QLatin1String("&quot;"));
+            else
+                escaped += c;
             break;
         case '\t':
             if (escapeWhitespace)
